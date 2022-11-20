@@ -9,8 +9,8 @@ class Product {
       {required this.image,
       required this.title,
       required this.price,
-      required this.isSelected, String? id});
-
+      required this.isSelected,
+      String? id});
 
   Product copyWith({
     String? id,
@@ -39,6 +39,11 @@ class Product {
   }
 
   static Product fromJson(Map<String, dynamic> json) {
-    return Product(id: json['id'], title: json['title'], price: json['price'], image: json['image'], isSelected: json['isSelected']);
+    return Product(
+        id: json['id'],
+        title: json['title'],
+        price: json['price'],
+        image: json['image'],
+        isSelected: json['isSelected']);
   }
 }

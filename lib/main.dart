@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant/pages/first_page.dart';
-
+import 'package:restaurant/services/firebase_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
-  //await dotenv.load();
+  final firebaseService = FirebaseService();
+
+  final List burgeritems = [];
+  get_data() async {
+    final Future<List> fsBurgeritems = firebaseService.getProduct('products');
+    burgeritems.add(fsBurgeritems);
+  }
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());

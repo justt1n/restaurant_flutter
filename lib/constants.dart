@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:restaurant/models/product.dart';
+import 'package:restaurant/services/firebase_service.dart';
 
 final style = GoogleFonts.roboto(
   fontSize: 30,
   color: Colors.white,
 );
 
+// final firebaseService = FirebaseService();
+
+// final List burgeritems = [];
+// get_data() async {
+//   final Future<List> fsBurgeritems = firebaseService.getProduct('burgers');
+//   burgeritems.add(fsBurgeritems);
+// }
 final List<Product> burgeritems = [
   Product(
       image: 'assets/humburgerone.jpg',

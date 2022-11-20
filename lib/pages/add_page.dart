@@ -5,6 +5,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:restaurant/constants.dart';
 import 'package:restaurant/models/product.dart';
 import 'package:restaurant/pages/home_page.dart';
+import 'package:restaurant/services/firebase_service.dart';
 
 class AddPage extends StatefulWidget {
   const AddPage({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class AddPage extends StatefulWidget {
 }
 
 class _AddPage extends State<AddPage> {
+  final firebaseService = FirebaseService();
   final controllerTitle = TextEditingController();
   final controllerPrice = TextEditingController();
   final controllerImage = TextEditingController();
@@ -61,7 +63,7 @@ class _AddPage extends State<AddPage> {
                 image: controllerImage.text,
                 isSelected: false,
               );
-              createProduct(product);
+              firebaseService.createProduct(product, 'products');
               Navigator.pop(context);
             },
             style: ButtonStyle(
@@ -90,10 +92,10 @@ class _AddPage extends State<AddPage> {
     );
   }
 
-  Future createProduct(Product product) async {
-    final docUser = FirebaseFirestore.instance.collection('products').doc();
-    product.id = docUser.id;
-    final json = product.toJson();
-    await docUser.set(json);
-  }
+  // Future createProduct(Product product) async {
+  //   final docUser = FirebaseFirestore.instance.collection('products').doc();
+  //   product.id = docUser.id;
+  //   final json = product.toJson();
+  //   await docUser.set(json);
+  // }
 }

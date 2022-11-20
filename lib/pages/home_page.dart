@@ -1,13 +1,17 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant/constants.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:restaurant/models/product.dart';
 import 'package:restaurant/pages/add_page.dart';
+import 'package:restaurant/pages/checkout_page.dart';
+import 'package:restaurant/services/firebase_service.dart';
+import 'package:restaurant/manager/CheckOutManager.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
-
+  static List<Product> selecteditems = [];
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -30,8 +34,6 @@ class _HomePageState extends State<HomePage>
     _controller.dispose();
   }
 
-  List selecteditems = [];
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,7 +49,7 @@ class _HomePageState extends State<HomePage>
                 child: Badge(
                   animationDuration: const Duration(milliseconds: 1500),
                   badgeContent: Text(
-                    selecteditems.length.toString(),
+                    HomePage.selecteditems.length.toString(),
                     style: const TextStyle(color: Colors.white),
                   ),
                   padding: const EdgeInsets.all(6),
@@ -140,7 +142,7 @@ class _HomePageState extends State<HomePage>
                       Navigator.push(
                           context,
                           PageTransition(
-                              child: const AddPage(),
+                              child: const CheckOutPage(),
                               duration: const Duration(seconds: 1),
                               type: PageTransitionType.rightToLeft));
                     },
@@ -158,8 +160,7 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget _buildlistitem(
-      {required int length, required List<Product> itemlist}) {
+  Widget _buildlistitem({required int length, required List itemlist}) {
     return ListView.builder(
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
@@ -169,7 +170,7 @@ class _HomePageState extends State<HomePage>
         });
   }
 
-  Widget _buildcard({required int index, required List<Product> myitemlist}) {
+  Widget _buildcard({required int index, required List myitemlist}) {
     return AspectRatio(
       aspectRatio: 2 / 3,
       child: Container(
@@ -207,9 +208,9 @@ class _HomePageState extends State<HomePage>
                         myitemlist[index].isSelected =
                             !myitemlist[index].isSelected;
                         if (myitemlist[index].isSelected) {
-                          selecteditems.add(myitemlist[index].isSelected);
+                          HomePage.selecteditems.add(myitemlist[index]);
                         } else {
-                          selecteditems.removeAt(index);
+                          HomePage.selecteditems.removeAt(index);
                         }
                       });
                     },
