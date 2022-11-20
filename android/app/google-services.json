@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:995169188593:android:54b5eb3254e5cd47c24750",
+        "mobilesdk_app_id": "1:995169188593:android:07e89bd2b36c2238c24750",
         "android_client_info": {
-          "package_name": "com.example.clone"
+          "package_name": "com.justt1n.restaurant"
         }
       },
       "oauth_client": [

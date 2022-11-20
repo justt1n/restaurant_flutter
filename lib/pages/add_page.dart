@@ -39,8 +39,8 @@ class _AddPage extends State<AddPage> {
           TextField(
             controller: controllerPrice,
             decoration: const InputDecoration(
-                hintText: 'Price',
-                hintTextDirection: TextDirection.rtl,
+              hintText: 'Price',
+              hintTextDirection: TextDirection.rtl,
             ),
             keyboardType: TextInputType.number,
           ),
@@ -48,8 +48,8 @@ class _AddPage extends State<AddPage> {
           TextField(
             controller: controllerImage,
             decoration: const InputDecoration(
-                hintText: 'Image',
-                hintTextDirection: TextDirection.rtl,
+              hintText: 'Image',
+              hintTextDirection: TextDirection.rtl,
             ),
           ),
           const SizedBox(height: 32),
@@ -65,7 +65,8 @@ class _AddPage extends State<AddPage> {
               Navigator.pop(context);
             },
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.yellow.shade900),
+              backgroundColor:
+                  MaterialStateProperty.all(Colors.yellow.shade900),
             ),
             child: const Text('Create'),
           ),
@@ -73,18 +74,17 @@ class _AddPage extends State<AddPage> {
           ElevatedButton(
             onPressed: () {
               Navigator.push(
-                context,
-                PageTransition(
-                  child: const HomePage(),
-                  duration: const Duration(seconds: 1),
-                  type: PageTransitionType.rightToLeft));
+                  context,
+                  PageTransition(
+                      child: const HomePage(),
+                      duration: const Duration(seconds: 1),
+                      type: PageTransitionType.rightToLeft));
             },
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.red.shade500),
             ),
             child: const Text('Cancel'),
           ),
-
         ],
       ),
     );
@@ -96,7 +96,4 @@ class _AddPage extends State<AddPage> {
     final json = product.toJson();
     await docUser.set(json);
   }
-
 }
-
-
