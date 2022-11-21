@@ -10,19 +10,17 @@ import 'package:checkout_screen_ui/checkout_page.dart';
 class PriceItem {
   PriceItem(
       {required this.name,
-      this.description,
       required this.quantity,
       required this.totalPriceCents});
 
   final String name;
-  final String? description;
   final int quantity;
   final int totalPriceCents;
   String get price => (totalPriceCents.toDouble()).toStringAsFixed(2);
 
   @override
   String toString() {
-    return 'PriceItem [ name: $name, description: $description, quantity: $quantity, totalPriceCents: $totalPriceCents ]';
+    return 'PriceItem [ name: $name, quantity: $quantity, totalPriceCents: $totalPriceCents ]';
   }
 }
 
@@ -60,6 +58,7 @@ class _CheckOutPage extends State<CheckOutPage> {
 
     final double _initHeight = _expHeight - (_collapsedAppBarHeight + 30.0);
 
+    // ignore: no_leading_underscores_for_local_identifiers
     final ScrollController _scrollController =
         ScrollController(initialScrollOffset: _initHeight);
 
@@ -93,7 +92,7 @@ class _CheckOutPage extends State<CheckOutPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Check Out"),
+        title: const Text("Check Out"),
         backgroundColor: Colors.yellow.shade900,
       ),
       body: CustomScrollView(
@@ -263,22 +262,6 @@ class _PriceListItem extends StatelessWidget {
                 ),
               ],
             ),
-            (priceItem.description != null && priceItem.description!.isNotEmpty)
-                ? Row(
-                    children: [
-                      Text(
-                        priceItem.description!,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey.shade700,
-                        ),
-                        overflow: TextOverflow.clip,
-                      ),
-                    ],
-                  )
-                : const SizedBox(
-                    height: 16,
-                  ),
           ],
         ),
       ),
