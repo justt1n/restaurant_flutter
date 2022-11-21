@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant/pages/first_page.dart';
+import 'package:restaurant/pages/login_page.dart';
 import 'package:restaurant/services/firebase_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const FirstPage(),
+      home: LoginPage(),
     );
   }
 }

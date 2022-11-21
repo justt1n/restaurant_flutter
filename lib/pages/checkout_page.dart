@@ -1,11 +1,6 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:provider/provider.dart';
 import 'package:restaurant/models/product.dart';
-import '../manager/CheckOutManager.dart';
 import 'home_page.dart';
-import 'package:checkout_screen_ui/checkout_page.dart';
 
 class PriceItem {
   PriceItem(

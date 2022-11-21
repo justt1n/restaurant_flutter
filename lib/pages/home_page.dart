@@ -1,16 +1,17 @@
 import 'package:badges/badges.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:restaurant/constants.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:restaurant/models/product.dart';
-import 'package:restaurant/pages/add_page.dart';
 import 'package:restaurant/pages/checkout_page.dart';
-import 'package:restaurant/services/firebase_service.dart';
-import 'package:restaurant/manager/CheckOutManager.dart';
+import 'package:restaurant/pages/login_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final User user;
+
+  const HomePage({required this.user});
+
   static List<Product> selecteditems = [];
   @override
   State<HomePage> createState() => _HomePageState();
@@ -19,12 +20,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   late TabController _controller;
+  late User _currentUser;
 
   @override
   void initState() {
-    super.initState();
-
+    _currentUser = widget.user;
     _controller = TabController(length: 4, vsync: this);
+    super.initState();
   }
 
   @override
@@ -33,6 +35,8 @@ class _HomePageState extends State<HomePage>
 
     _controller.dispose();
   }
+
+  bool _isSigningOut = false;
 
   @override
   Widget build(BuildContext context) {
@@ -148,6 +152,38 @@ class _HomePageState extends State<HomePage>
                     },
                     child: Text(
                       'Order',
+                      style: style.copyWith(fontSize: 22),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Center(
+                child: Container(
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                      color: Colors.red.shade400,
+                      borderRadius: BorderRadius.circular(20)),
+                  //padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: MaterialButton(
+                    onPressed: () async {
+                      setState(() {
+                        _isSigningOut = true;
+                      });
+                      await FirebaseAuth.instance.signOut();
+                      setState(() {
+                        _isSigningOut = false;
+                      });
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => LoginPage(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Sign out',
                       style: style.copyWith(fontSize: 22),
                     ),
                   ),

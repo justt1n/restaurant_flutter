@@ -1,10 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:restaurant/constants.dart';
 import 'package:restaurant/models/product.dart';
-import 'package:restaurant/pages/home_page.dart';
 import 'package:restaurant/services/firebase_service.dart';
 
 class AddPage extends StatefulWidget {
@@ -74,14 +71,7 @@ class _AddPage extends State<AddPage> {
           ),
           const SizedBox(height: 12),
           ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      child: const HomePage(),
-                      duration: const Duration(seconds: 1),
-                      type: PageTransitionType.rightToLeft));
-            },
+            onPressed: () {},
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.red.shade500),
             ),

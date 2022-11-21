@@ -1,11 +1,14 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:restaurant/constants.dart';
 import 'package:restaurant/pages/home_page.dart';
 
 class FirstPage extends StatefulWidget {
-  const FirstPage({Key? key}) : super(key: key);
+  final User user;
+
+  const FirstPage({required this.user});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -13,6 +16,14 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+  late User _currentUser;
+
+  @override
+  void initState() {
+    _currentUser = widget.user;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +87,9 @@ class _FirstPageState extends State<FirstPage> {
                           Navigator.push(
                               context,
                               PageTransition(
-                                  child: const HomePage(),
+                                  child: HomePage(
+                                    user: _currentUser,
+                                  ),
                                   duration: const Duration(seconds: 1),
                                   type: PageTransitionType.rightToLeft));
                         },
