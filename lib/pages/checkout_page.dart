@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:restaurant/models/myorder.dart';
 import 'package:restaurant/models/product.dart';
+import 'package:restaurant/pages/profile_page.dart';
+import 'package:restaurant/services/firebase_service.dart';
 import 'home_page.dart';
 
 class PriceItem {
@@ -33,7 +37,7 @@ class _CheckOutPage extends State<CheckOutPage> {
     const double _padding = 18.0;
     const double _dividerThickness = 1.2;
     const double _collapsedAppBarHeight = 100;
-
+    User? user = FirebaseAuth.instance.currentUser;
     final List<PriceItem> priceItems = [];
     for (var item in HomePage.selecteditems) {
       priceItems.add(fromProducts(item));
@@ -184,7 +188,15 @@ class _CheckOutPage extends State<CheckOutPage> {
                             backgroundColor: Colors.yellow.shade900,
                             minimumSize: const Size(double.infinity, 50),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pop(context);
+                            MyOrder myOrder = MyOrder(
+                                username: user?.email,
+                                products: HomePage.selecteditems,
+                                total: _priceCents);
+                            FirebaseService firebaseService = FirebaseService();
+                            firebaseService.createOrder(myOrder);
+                          },
                         ),
                       const SizedBox(
                         height: _spacing,

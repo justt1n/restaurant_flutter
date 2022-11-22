@@ -174,6 +174,7 @@ class _HomePageState extends State<HomePage>
                       });
                       await FirebaseAuth.instance.signOut();
                       setState(() {
+                        HomePage.selecteditems = [];
                         _isSigningOut = false;
                       });
                       Navigator.of(context).pushReplacement(
