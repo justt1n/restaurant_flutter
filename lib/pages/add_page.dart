@@ -1,5 +1,3 @@
-import 'package:animate_do/animate_do.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant/models/product.dart';
 import 'package:restaurant/services/firebase_service.dart';
